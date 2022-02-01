@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import Nav from "../../components/Navbar/index";
-import Foot from "../../components/Footer/index";
 import Card from "../../components/Shared/Card/index";
+import Bar from "../../components/Searchbar/index";
 
 const Wrapper = styled.div`
 .grid {
@@ -54,10 +53,17 @@ const info = [
 ];
 
 const Main = (props) => {
+    const [fdata, setFdata] = useState(info);
+    const filter = (name) => {
+        console.log(name);
+        let filteredArray = info.filter((li) => li.name.toLowerCase().includes(name))
+        setFdata(filteredArray);
+    };
     return <Wrapper>
+        <Bar search={(data) => filter(data)} />
         <div className='grid'>
             {
-                info.map((li) => {
+                fdata.map((li) => {
                     return <Card src={li.src} h3={li.name} span={li.post} />
                 })
             }

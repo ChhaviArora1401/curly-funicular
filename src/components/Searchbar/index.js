@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 
 const Swrapper = styled.div`
@@ -10,10 +10,16 @@ const Swrapper = styled.div`
 }
 `
 
-const Bar = () => {
+const Bar = (props) => {
+    const [name, setName] = useState("");
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
     return <Swrapper>
-        <input type="text" name="name" placeholder='Search' id="search" />
-    </Swrapper>
+        <form onSubmit={(e) => handleSubmit(e)}>
+            <input type="text" name="name" placeholder="Search Character" defaultValue={name} onChange={(e) => props.search(e.target.value)} />
+        </form>
+    </Swrapper >
 };
 
 export default Bar;
